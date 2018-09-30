@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}分类列表{% endblock title %}
+
+{% block content %}
+
+    <div class="main_wrap clearfix">
+        <div class="l_wrap fl clearfix">
+            <div class="new_goods">
+                <h3>新品推荐</h3>
+                <ul>
+                    <li>
+                        <a href="http://www.xiaozhican.top/shop/detail/153/"><img
+                                src="./天天生鲜首页_files/5523aa83N67e99470.jpg"></a>
+                        <h4><a href="http://www.xiaozhican.top/shop/categorys/6/#">一品奶黄包 350g （10只）</a></h4>
+                        <div class="prize">￥11.90</div>
+                    </li>
+
+                    <li>
+                        <a href="http://www.xiaozhican.top/shop/detail/177/"><img
+                                src="./天天生鲜首页_files/5523aa83N67e99470.jpg"></a>
+                        <h4><a href="http://www.xiaozhican.top/shop/categorys/6/#">一品奶黄包 350g （10只）</a></h4>
+                        <div class="prize">￥11.90</div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="r_wrap fr clearfix">
+            <div class="sort_bar">
+                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_order=1" class="active">默认</a>
+                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_order=2">价格</a>
+                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_order=3">人气</a>
+            </div>
+
+            <ul class="goods_type_list clearfix">
+                {% for item in page.object_list %}
+                    <li>
+                        <a href="http://www.xiaozhican.top/shop/detail/180/">
+                            <img src="./天天生鲜首页_files/57c95498Nfd37b218.jpg">
+                        </a>
+                        <h4><a href="http://www.xiaozhican.top/shop/detail/180/">{{ item.name }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">￥{{ item.price }}</span>
+                            <span class="unit">34.00/500g/点击:4</span>
+                            <span id="add_url"></span>
+                            <input type="hidden" name="hidden" id="add_cart_url" value="/shop_cart/add_cart/180/">
+                            <a href="javascript:void(0)" class="add_goods" gid="180" title="加入购物车"></a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="pagenation">
+                {% if page.has_previous %}
+                    <a href="{% url 'list' %}?category_id={{ category_id }}&num={{ page.previous_page_number }}">上一页</a>
+                {% endif %}
+                {% for page in page.paginator.page_range %}
+                    <a href="{% url 'list' %}?category_id={{ category_id }}&num={{ page }}"
+                       class="active" style="background-color: #1b6d85">{{ page }}</a>
+                {% endfor %}
+                {% if page.has_next %}
+                    <a href="{% url 'list' %}?category_id={{ category_id }}&num={{ page.next_page_number }}"
+                       style="background-color: #5bc0de"> 下一页 </a>
+                {% endif %}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=1" class="active" style="background-color: #1b6d85">1</a>#}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=2">2</a>#}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=3">3</a>#}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=4">4</a>#}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=5">5</a>#}
+{#                <a href="http://www.xiaozhican.top/shop/categorys/6/?curr_page=2" style="background-color: #5bc0de"> 下一页 </a>#}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
