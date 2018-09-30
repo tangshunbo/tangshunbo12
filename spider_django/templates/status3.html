@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>myProject</title>
+    <!-- 引入 lib/echarts.custom.min.js -->
+    <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+</head>
+<body style="background-color: silver">
+    <div align="center">工作待遇分布</div>
+    <div id="main" style="width: 1600px;height:740px;"></div>
+    <script>
+        var lists={{ s|safe }}
+        // 绘制图表。
+        echarts.init(document.getElementById('main')).setOption({
+            series: {
+                type: 'pie',
+                data:
+                lists
+            }
+        });
+    </script>
+<a  id ='find2' href="{% url 'find2' %}">上一页</a>
+<a  id ='find4' href="{% url 'find4' %}">下一页</a>
+</body>
+</html>

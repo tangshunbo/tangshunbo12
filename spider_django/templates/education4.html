@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+</head>
+<body style="background-color: beige">
+    <div id="main" style="width: 1500px;height:800px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var names={{ names|safe }}
+        var educations={{ educations|safe }}
+
+        var l1={{ l1|safe }}
+        var l2={{ l2|safe }}
+        var l3={{ l3|safe }}
+        var l4={{ l4|safe }}
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '学历分布',
+                subtext: '数据来自58同城'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data:
+                    educations
+            },
+            grid: {
+                left: '13%',
+                right: '4%',
+                bottom: '2%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.05]
+            },
+            yAxis: {
+                type: 'category',
+                data:
+                    names
+            },
+            series: [
+                {
+                    name: '学历不限',
+                    type: 'bar',
+                    data: l1
+                },
+                {
+                    name: '高中',
+                    type: 'bar',
+                    data: l2
+                },
+                {
+                    name: '大专',
+                    type: 'bar',
+                    data: l3
+                },
+                {
+                    name: '本科',
+                    type: 'bar',
+                    data: l4
+                }
+            ]
+        };
+
+
+myChart.setOption(option)
+    </script>
+    <a id ='find2' href="{% url 'find5' %}">下一页</a>
+    <a id ='find2' href="{% url 'find3' %}">上一页</a>
+
+</body>
+</html>

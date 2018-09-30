@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+</head>
+<body style="background-color:silver">
+<center><div>{{ lists3 }}</div></center>
+    <div id="main" style="width: 1700px;height:700px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var a={{ lists1|safe }}
+        var b={{ lists2|safe }}
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '工资分布'
+            },
+            tooltip: {},
+            legend: {
+                data:['工资']
+            },
+            xAxis: {
+                data: a
+            },
+            yAxis: {},
+            series: [{
+                name: '工资/元',
+                type: 'bar',
+                data: b
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+<a href="{% url 'find3' %}">下一页</a>
+<a  id ='find2' href="{% url 'find' %}">上一页</a>
+</body>
+</html>

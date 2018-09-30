@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'js/echarts.js' %}"></script>
+</head>
+<body style="background-color: antiquewhite">
+<div align="center">工作种类的分布情况</div>
+    <div id="main" style="width: 1900px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var a={{ s2|safe }}
+        var b={{ s1|safe }}
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+                data:['']
+            },
+            xAxis: {
+                data: a
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: b
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <a href="{% url 'find2' %}">下一页</a>
+
+</body>
+</html>
